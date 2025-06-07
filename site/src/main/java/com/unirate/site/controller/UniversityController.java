@@ -1,4 +1,4 @@
-package com.unirate.unirate.controller;
+package com.unirate.site.controller;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.unirate.unirate.model.Review;
-import com.unirate.unirate.model.University;
-import com.unirate.unirate.service.ProgramService;
-import com.unirate.unirate.service.ReviewService;
-import com.unirate.unirate.service.UniversityService;
+import com.unirate.site.model.Review;
+import com.unirate.site.model.University;
+import com.unirate.site.service.ProgramService;
+import com.unirate.site.service.ReviewService;
+import com.unirate.site.service.UniversityService;
 
 @Controller
 public class UniversityController {
@@ -25,7 +25,8 @@ public class UniversityController {
     private final ProgramService programService;
     private final ReviewService reviewService;
 
-    public UniversityController(UniversityService universityService, ProgramService programService, ReviewService reviewService) {
+    public UniversityController(UniversityService universityService, ProgramService programService,
+            ReviewService reviewService) {
         this.universityService = universityService;
         this.programService = programService;
         this.reviewService = reviewService;
@@ -45,32 +46,29 @@ public class UniversityController {
         university.setPrograms(programService.findByUniversityId(pageNumber));
         System.out.println(university.getName());
         System.out.println(university.getPrograms().get(0).getName());
-        model.addAttribute("university",university);
+        model.addAttribute("university", university);
 
         return "university";
     }
 
     @PostMapping("/universities")
     public String showFiltredUniversities(
-        @RequestParam String city,
-        @RequestParam String program, 
-        Model model) {
-            
-            if(city != "Все города" && program != "Все направления"){
-                System.out.println(city+program);
-                model.addAttribute("universities", universityService.findByCItyAndProgramName(program, city));
-            }
-            else if (city != "Все города"){
-                System.out.println(city);
-                model.addAttribute("universities", universityService.findByCity(city));
-            }
-            else if (program != "Все направления"){
-                System.out.println(program);
-                model.addAttribute("universities", universityService.findByProgram(program));
-            }
-            else {
-                model.addAttribute("universities", universityService.findAll());
-            }
+            @RequestParam String city,
+            @RequestParam String program,
+            Model model) {
+
+        if (city != "Все города" && program != "Все направления") {
+            System.out.println(city + program);
+            model.addAttribute("universities", universityService.findByCItyAndProgramName(program, city));
+        } else if (city != "Все города") {
+            System.out.println(city);
+            model.addAttribute("universities", universityService.findByCity(city));
+        } else if (program != "Все направления") {
+            System.out.println(program);
+            model.addAttribute("universities", universityService.findByProgram(program));
+        } else {
+            model.addAttribute("universities", universityService.findAll());
+        }
 
         return "university";
     }
@@ -89,12 +87,11 @@ public class UniversityController {
 
     @PostMapping("/universities/{id}/reviews")
     public String createReview(
-    @RequestParam Double rating,
-    @RequestParam String text,
-    @RequestParam String author,
-    @PathVariable Long id
-) {
+            @RequestParam Double rating,
+            @RequestParam String text,
+            @RequestParam String author,
+            @PathVariable Long id) {
         reviewService.create(new Review(universityService.findUniversityById(id), author, rating, text));
-        return "redirect:/universities/"+id; 
+        return "redirect:/universities/" + id;
     }
 }

@@ -1,11 +1,12 @@
-package com.unirate.unirate.service;
+package com.unirate.site.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.unirate.unirate.model.Review;
-import com.unirate.unirate.repository.ReviewRepository;
+import com.unirate.site.model.Review;
+import com.unirate.site.repository.ReviewRepository;
+
 @Service
 public class ReviewService {
     private final ReviewRepository reviewRepository;
@@ -14,13 +15,11 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-
-    public List<Review> findByUniversityId(Long universityId){
+    public List<Review> findByUniversityId(Long universityId) {
         return reviewRepository.findByUniversityId(universityId);
     }
 
-    public Review create(Review review){
+    public Review create(Review review) {
         return reviewRepository.save(review);
     }
 }
-

@@ -1,10 +1,9 @@
-package com.unirate.unirate.model;
-
+package com.unirate.site.model;
 
 import java.util.List;
 
-import com.unirate.unirate.service.ProgramService;
-import com.unirate.unirate.service.ReviewService;
+import com.unirate.site.service.ProgramService;
+import com.unirate.site.service.ReviewService;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="university")
+@Table(name = "university")
 public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,13 +39,13 @@ public class University {
     public void setMapSource(String mapSource) {
         this.mapSource = mapSource;
     }
+
     @OneToMany(mappedBy = "university")
     private List<Program> programs;
 
     @OneToMany(mappedBy = "university")
     private List<Review> reviews;
 
-    
     public List<Review> getReviews() {
         return reviews;
     }
@@ -70,6 +69,7 @@ public class University {
     public void setHasDormitory(boolean hasDormitory) {
         this.hasDormitory = hasDormitory;
     }
+
     private String address;
     private String phone;
     private String email;
@@ -170,17 +170,22 @@ public class University {
     public void setId(Long id) {
         this.id = id;
     }
+
     public University() {
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getCity() {
         return city;
     }
+
     public void setCity(String city) {
         this.city = city;
     }
@@ -196,7 +201,8 @@ public class University {
 
     public University(Long id, String name, String city, Double rating, String speciality, String description,
             int foundationYear, long studentsCount, long teachersCount, int facultiesCount, int programsCount,
-            boolean hasDormitory, String address, String phone, String email, String website, String mapSource, ProgramService programService, ReviewService reviewService) {
+            boolean hasDormitory, String address, String phone, String email, String website, String mapSource,
+            ProgramService programService, ReviewService reviewService) {
         this.id = id;
         this.name = name;
         this.city = city;

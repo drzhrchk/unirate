@@ -1,17 +1,17 @@
-package com.unirate.unirate.repository;
+package com.unirate.site.repository;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.unirate.unirate.model.University;
+import com.unirate.site.model.University;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 @Repository
-public interface UniversityRepository extends JpaRepository<University, Long>{
+public interface UniversityRepository extends JpaRepository<University, Long> {
     @Query(value = "SELECT * FROM university WHERE name = :name", nativeQuery = true)
     Optional<University> findByName(String name);
 
