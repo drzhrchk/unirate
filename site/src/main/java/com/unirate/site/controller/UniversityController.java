@@ -1,0 +1,100 @@
+package com.unirate.unirate.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.unirate.unirate.model.Review;
+import com.unirate.unirate.model.University;
+import com.unirate.unirate.service.ProgramService;
+import com.unirate.unirate.service.ReviewService;
+import com.unirate.unirate.service.UniversityService;
+
+@Controller
+public class UniversityController {
+
+    private final UniversityService universityService;
+    private final ProgramService programService;
+    private final ReviewService reviewService;
+
+    public UniversityController(UniversityService universityService, ProgramService programService, ReviewService reviewService) {
+        this.universityService = universityService;
+        this.programService = programService;
+        this.reviewService = reviewService;
+    }
+
+    @GetMapping("/")
+    public String showHomePage(Model model) {
+        model.addAttribute("universities", universityService.findAll());
+        model.addAttribute("program", universityService.findAll());
+        return "index"; // templates/index.html
+    }
+
+    @GetMapping("/universities/{pageNumber}")
+    public String showUniversityPage(@PathVariable Long pageNumber, Model model) {
+        University university = universityService.findUniversityById(pageNumber);
+        university.setReviews(reviewService.findByUniversityId(pageNumber));
+        university.setPrograms(programService.findByUniversityId(pageNumber));
+        System.out.println(university.getName());
+        System.out.println(university.getPrograms().get(0).getName());
+        model.addAttribute("university",university);
+
+        return "university";
+    }
+
+    @PostMapping("/universities")
+    public String showFiltredUniversities(
+        @RequestParam String city,
+        @RequestParam String program, 
+        Model model) {
+            
+            if(city != "Все города" && program != "Все направления"){
+                System.out.println(city+program);
+                model.addAttribute("universities", universityService.findByCItyAndProgramName(program, city));
+            }
+            else if (city != "Все города"){
+                System.out.println(city);
+                model.addAttribute("universities", universityService.findByCity(city));
+            }
+            else if (program != "Все направления"){
+                System.out.println(program);
+                model.addAttribute("universities", universityService.findByProgram(program));
+            }
+            else {
+                model.addAttribute("universities", universityService.findAll());
+            }
+
+        return "university";
+    }
+
+    @GetMapping("/api")
+    @ResponseBody
+    public List<University> findAllUniversities() {
+        return universityService.findAll();
+    }
+
+    @PostMapping("/api/create")
+    @ResponseBody
+    public University createUniversity(@RequestBody University university) {
+        return universityService.create(university);
+    }
+
+    @PostMapping("/universities/{id}/reviews")
+    public String createReview(
+    @RequestParam Double rating,
+    @RequestParam String text,
+    @RequestParam String author,
+    @PathVariable Long id
+) {
+        reviewService.create(new Review(universityService.findUniversityById(id), author, rating, text));
+        return "redirect:/universities/"+id; 
+    }
+}
