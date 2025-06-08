@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${university.name} + ' - UniRate'">Университет - UniRate</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .university-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1200x400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .rating-badge {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .review-card {
+            transition: all 0.3s ease;
+        }
+        .review-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            border-bottom: 3px solid #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">UniRate</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Все вузы</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Шапка университета -->
+    <div class="university-header">
+        <div class="container text-center">
+            <h1 class="display-4 mb-3" th:text="${university.name}">Название университета</h1>
+            <div class="d-flex justify-content-center align-items-center">
+                <span class="badge bg-success rating-badge me-3" 
+                      th:text="${university.rating}">4.5</span>
+                <div class="text-start">
+                    <p class="mb-1 fs-5" th:text="${university.city}">Город</p>
+                    <p class="mb-0" th:text="${university.foundationYear} + ' год основания'">1940 год основания</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основное содержимое -->
+    <div class="container mb-5">
+        <div class="row">
+            <!-- Левая колонка - основная информация -->
+            <div class="col-lg-8">
+                <!-- Навигационные вкладки -->
+                <ul class="nav nav-tabs mb-4" id="universityTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button">О вузе</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="programs-tab" data-bs-toggle="tab" data-bs-target="#programs" type="button">Программы</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button">Отзывы</button>
+                    </li>
+                </ul>
+
+                <!-- Содержимое вкладок -->
+                <div class="tab-content" id="universityTabsContent">
+                    <!-- Вкладка "О вузе" -->
+                    <div class="tab-pane fade show active" id="about" role="tabpanel">
+                        <h3 class="mb-3">Описание</h3>
+                        <p class="lead" th:text="${university.description}">Здесь должно быть подробное описание университета, его история, миссия и особенности.</p>
+                        
+                        <h3 class="mt-4 mb-3">Контактная информация</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Адрес:</strong> <span th:text="${university.address}">ул. Университетская, 1</span></p>
+                                <p><strong>Телефон:</strong> <span th:text="${university.phone}">+7 (XXX) XXX-XX-XX</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Email:</strong> <span th:text="${university.email}">contact@university.edu</span></p>
+                                <p><strong>Сайт:</strong> <a th:href="${university.website}" th:text="${university.website}">www.university.edu</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Вкладка "Программы" -->
+                    <div class="tab-pane fade" id="programs" role="tabpanel">
+                        <h3 class="mb-4">Программы обучения</h3>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action" 
+                               th:each="program : ${university.programs}"
+                               th:text="${program.name} + ' (' + ${program.degree} + ')'">Программа (Бакалавриат)</a>
+                        </div>
+                    </div>
+
+                    <!-- Вкладка "Отзывы" -->
+                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                        <h3 class="mb-4">Отзывы студентов</h3>
+                        
+                        <!-- Существующие отзывы -->
+                        <div class="mb-4" th:each="review : ${university.reviews}">
+                            <div class="card review-card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="card-title" th:text="${review.author}">Иван Иванов</h5>
+                                        <span class="badge bg-warning text-dark" 
+                                              th:text="${review.rating} + '/5'">4.5/5</span>
+                                    </div>
+                                    <p class="card-text" th:text="${review.text}">Отличный университет с сильным преподавательским составом...</p>
+                                    <p class="text-muted small" th:text="${review.createdAt}">15 мая 2023</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правая колонка - дополнительная информация -->
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Ключевые показатели</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Количество студентов:</span>
+                            <strong th:text="${university.studentsCount}">15000</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Факультетов:</span>
+                            <strong th:text="${university.facultiesCount}">12</strong>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Преподавателей:</span>
+                            <strong th:text="${university.teachersCount}">800</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Расположение</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="map" style="height: 200px; background-color: #eee;">
+                        <script type="text/javascript" charset="utf-8" th:src="${university.mapSource}"></script>
+                        </div>
+                        <p class="p-3 mb-0" th:text="${university.address}">ул. Университетская, 1</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Форма для добавления отзыва -->
+        <div class="card mt-5">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Оставить отзыв</h5>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/universities/{id}/reviews(id=${university.id})}" method="post">
+                    <div class="mb-3">
+                        <label for="reviewRating" class="form-label">Ваша оценка</label>
+                        <select class="form-select" id="reviewRating" name="rating" required>
+                            <option value="" selected disabled>Выберите оценку</option>
+                            <option value="5">5 - Отлично</option>
+                            <option value="4">4 - Хорошо</option>
+                            <option value="3">3 - Удовлетворительно</option>
+                            <option value="2">2 - Плохо</option>
+                            <option value="1">1 - Ужасно</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reviewText" class="form-label">Текст отзыва</label>
+                        <textarea class="form-control" id="reviewText" name="text" rows="4" required
+                                  placeholder="Поделитесь вашим опытом обучения в этом университете"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reviewAuthor" class="form-label">Ваше имя (необязательно)</label>
+                        <input type="text" class="form-control" id="reviewAuthor" name="author"
+                               placeholder="Аноним">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>UniRate</h5>
+                    <p>Платформа для выбора университета</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>© 2023 UniRate. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Скрипт для карты -->
+    <script>
+        // Здесь можно добавить инициализацию карты (Яндекс.Карты или Google Maps)
+        console.log("Здесь будет инициализация карты");
+    </script>
+</body>
+</html>
