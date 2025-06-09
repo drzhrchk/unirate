@@ -5,7 +5,6 @@ import java.util.List;
 import com.unirate.site.service.ProgramService;
 import com.unirate.site.service.ReviewService;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,12 +33,13 @@ public class University {
     private Double avgTeachersRating;
     private Double avgFoodRating;
     private Double avgLifeRating;
-    private Double avgRating;
+    private Double Rating;
 
     public University(String name, String city, String speciality, String description,
             int foundationYear, long studentsCount, long teachersCount, int facultiesCount, int programsCount,
             boolean hasDormitory, String mapSource, Double educationRating, Double teachersRating, Double foodRating,
-            Double lifeRating, List<Program> programs, List<Review> reviews, String address, String phone,
+            Double rating, Double lifeRating, List<Program> programs, List<Review> reviews, String address,
+            String phone,
             String email, String website) {
         this.name = name;
         this.city = city;
@@ -56,6 +56,7 @@ public class University {
         this.avgTeachersRating = teachersRating;
         this.avgFoodRating = foodRating;
         this.avgLifeRating = lifeRating;
+        this.Rating = rating;
         this.programs = programs;
         this.reviews = reviews;
         this.address = address;
@@ -287,11 +288,11 @@ public class University {
         this.programs = programs;
     }
 
-    public Double getAvgRating() {
-        return avgRating;
+    public Double getRating() {
+        return Rating;
     }
 
-    public void setAvgRating(Double avgRating) {
-        this.avgRating = avgRating;
+    public void setRating(Double Rating) {
+        this.Rating = Rating;
     }
 }

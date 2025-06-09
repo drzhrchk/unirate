@@ -53,6 +53,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Все вузы</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ratings">Рейтинги</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -63,7 +66,7 @@
         <div class="container text-center">
             <h1 class="display-4 mb-3" th:text="${university.name}">Название университета</h1>
             <div class="d-flex justify-content-center align-items-center">
-                <span class="badge bg-success rating-badge me-3" th:text="${university.avgRating}">4.5</span>
+                <span class="badge bg-success rating-badge me-3" th:text="${university.rating}">4.5</span>
                 <div class="text-start">
                     <p class="mb-1 fs-5" th:text="${university.city}">Город</p>
                     <p class="mb-0" th:text="${university.foundationYear} + ' год основания'">1940 год основания</p>
@@ -164,7 +167,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-2 col-6 mb-3">
                                         <div class="bg-light p-3 rounded">
-                                            <h5 class="text-primary" th:text="${university.avgRating} ?: 'Н/Д'">4.5</h5>
+                                            <h5 class="text-primary" th:text="${university.rating} ?: 'Н/Д'">4.5</h5>
                                             <small class="text-muted">Общий рейтинг</small>
                                         </div>
                                     </div>

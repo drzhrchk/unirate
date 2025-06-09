@@ -2,10 +2,8 @@ package com.unirate.site.controller;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -79,9 +77,14 @@ public class UniversityController {
         return "redirect:/universities/" + id;
     }
 
-    @GetMapping("/raitings")
-    public String getRaitings() {
-        return "raitings";
+    @GetMapping("/ratings")
+    public String getRaitings(Model model) {
+        model.addAttribute("rating1", universityService.findAllOrderByAvgEducationRaiting());
+        model.addAttribute("rating2", universityService.findAllOrderByAvgFoodRaiting());
+        model.addAttribute("rating3", universityService.findAllOrderByAvgLifeRating());
+        model.addAttribute("rating4", universityService.findAllOrderByAvgTeachersRaiting());
+
+        return "ratings";
     }
 
     @GetMapping("/error")

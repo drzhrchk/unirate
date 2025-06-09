@@ -31,4 +31,16 @@ public interface UniversityRepository extends JpaRepository<University, Long> {
 
     @Query(value = "SELECT DISTINCT city FROM university", nativeQuery = true)
     List<String> findDistinctCities();
+
+    @Query(value = "SELECT * FROM university ORDER BY avg_food_rating LIMIT 5", nativeQuery = true)
+    List<University> findAllOrderByAvgFoodRaiting();
+
+    @Query(value = "SELECT * FROM university ORDER BY avg_teachers_rating LIMIT 5", nativeQuery = true)
+    List<University> findAllOrderByAvgTeachersRaiting();
+
+    @Query(value = "SELECT * FROM university ORDER BY avg_education_rating LIMIT 5", nativeQuery = true)
+    List<University> findAllOrderByAvgEducationRaiting();
+
+    @Query(value = "SELECT * FROM university ORDER BY avg_life_rating LIMIT 5", nativeQuery = true)
+    List<University> findAllOrderByAvgLifeRating();
 }

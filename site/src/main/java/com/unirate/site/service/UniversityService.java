@@ -43,4 +43,20 @@ public class UniversityService {
     public List<String> findDistinctCities() {
         return universityRepository.findDistinctCities();
     }
+
+    public List<University> findAllOrderByAvgEducationRaiting() {
+        return universityRepository.findAllOrderByAvgEducationRaiting();
+    }
+
+    public List<University> findAllOrderByAvgLifeRating() {
+        return universityRepository.findAllOrderByAvgLifeRating();
+    }
+
+    public List<University> findAllOrderByAvgFoodRaiting() {
+        return universityRepository.findAllOrderByAvgFoodRaiting();
+    }
+
+    public List<University> findAllOrderByAvgTeachersRaiting() {
+        return universityRepository.findAllOrderByAvgTeachersRaiting();
+    }
 }
