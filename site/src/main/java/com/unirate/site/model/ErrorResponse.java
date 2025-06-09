@@ -1,7 +1,6 @@
 package com.unirate.site.model;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ErrorResponse {
     private String code;

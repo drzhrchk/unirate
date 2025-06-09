@@ -2,9 +2,6 @@ package com.unirate.site.model;
 
 import java.util.List;
 
-import com.unirate.site.service.ProgramService;
-import com.unirate.site.service.ReviewService;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -57,7 +54,7 @@ public class University {
         this.avgTeachersRating = teachersRating;
         this.avgFoodRating = foodRating;
         this.avgLifeRating = lifeRating;
-        rating = rating;
+        this.rating = rating;
         this.programs = programs;
         this.reviews = reviews;
         this.address = address;

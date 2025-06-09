@@ -17,6 +17,7 @@ public interface UniversityRepository extends JpaRepository<University, Long> {
     @Query(value = "SELECT * FROM university WHERE ORDER BY rating", nativeQuery = true)
     List<University> find();
 
+    @SuppressWarnings("null")
     @Query(value = "SELECT * FROM university WHERE id = :id", nativeQuery = true)
     Optional<University> findById(Long id);
 
