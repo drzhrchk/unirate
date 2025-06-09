@@ -52,7 +52,7 @@ public class UniversityController {
         return "university";
     }
 
-    @PostMapping("/universities")
+    @GetMapping("/universities")
     public String showFiltredUniversities(
             @RequestParam String city,
             @RequestParam String program,
@@ -60,7 +60,7 @@ public class UniversityController {
 
         if (city != "Все города" && program != "Все направления") {
             System.out.println(city + program);
-            model.addAttribute("universities", universityService.findByCItyAndProgramName(program, city));
+            model.addAttribute("universities", universityService.findByCityAndProgramName(program, city));
         } else if (city != "Все города") {
             System.out.println(city);
             model.addAttribute("universities", universityService.findByCity(city));

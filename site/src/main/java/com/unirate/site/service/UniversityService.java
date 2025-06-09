@@ -32,8 +32,8 @@ public class UniversityService {
         return universityRepository.findByProgramName(programName).get();
     }
 
-    public University findByCItyAndProgramName(String programName, String city) {
-        return universityRepository.findByCItyAndProgramName(programName, city).get();
+    public University findByCityAndProgramName(String programName, String city) {
+        return universityRepository.findByCityAndProgramName(programName, city).get();
     }
 
     public University create(University university) {
