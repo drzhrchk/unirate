@@ -53,26 +53,24 @@ public class UniversityController {
     }
 
     @GetMapping("/universities")
-    public String showFiltredUniversities(
-            @RequestParam String city,
-            @RequestParam String program,
-            Model model) {
+    public String showFilteredUniversities(
+        @RequestParam(required = false, defaultValue = "Все города") String city,
+        @RequestParam(required = false, defaultValue = "Все направления") String program,
+        Model model) {
 
-        if (city != "Все города" && program != "Все направления") {
-            System.out.println(city + program);
-            model.addAttribute("universities", universityService.findByCityAndProgramName(program, city));
-        } else if (city != "Все города") {
-            System.out.println(city);
-            model.addAttribute("universities", universityService.findByCity(city));
-        } else if (program != "Все направления") {
-            System.out.println(program);
-            model.addAttribute("universities", universityService.findByProgram(program));
-        } else {
-            model.addAttribute("universities", universityService.findAll());
-        }
-
-        return "university";
+    // Правильное сравнение строк в Java
+    if (!"Все города".equals(city) && !"Все направления".equals(program)) {
+        model.addAttribute("universities", universityService.findByCityAndProgramName(city, program));
+    } else if (!"Все города".equals(city)) {
+        model.addAttribute("universities", universityService.findByCity(city));
+    } else if (!"Все направления".equals(program)) {
+        model.addAttribute("universities", universityService.findByProgramName(program));
+    } else {
+        model.addAttribute("universities", universityService.findAll());
     }
+
+    return "university";
+}
 
     @GetMapping("/api")
     @ResponseBody

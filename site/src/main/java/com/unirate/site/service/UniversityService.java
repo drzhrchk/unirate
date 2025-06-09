@@ -28,7 +28,7 @@ public class UniversityService {
         return universityRepository.findByCity(city).get();
     }
 
-    public University findByProgram(String programName) {
+    public University findByProgramName(String programName) {
         return universityRepository.findByProgramName(programName).get();
     }
 
