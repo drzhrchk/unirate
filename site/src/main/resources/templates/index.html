@@ -82,20 +82,15 @@
                         <label for="city" class="form-label">Город</label>
                         <select id="city" class="form-select" name="city">
                             <option selected>Все города</option>
-                            <option>Москва</option>
-                            <option>Санкт-Петербург</option>
-                            <option>Новосибирск</option>
-                            <option>Казань</option>
+                            <option th:each="cityName : ${cityNames}" th:value="${cityName}" th:text="${cityName}">
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label for="speciality" class="form-label">Направление</label>
                         <select id="speciality" class="form-select" name="program">
                             <option selected>Все направления</option>
-                            <option>Информационные технологии</option>
-                            <option>Экономика</option>
-                            <option>Медицина</option>
-                            <option>Инженерия</option>
+                            <option th:each="programName : ${programNames}" th:value="${programName}"
+                                th:text="${programName}">
                         </select>
                     </div>
                     <div class="col-12">
@@ -111,56 +106,17 @@
             <div class="col-md-4 mb-4" th:each="university : ${universities}">
                 <div class="card university-card h-100">
                     <div class="position-absolute top-0 end-0 m-3">
-                        <span class="badge bg-success rating-badge" th:text="${university.rating}">4.8</span>
+                        <span class="badge bg-success rating-badge" th:text="${university.rating}"></span>
                     </div>
                     <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${university.name}">Московский государственный университет</h5>
+                        <h5 class="card-title" th:text="${university.name}"></h5>
                         <p class="card-text">
-                            <span class="badge bg-info text-dark me-1" th:text="${university.city}">Москва</span>
-                            <span class="badge bg-warning text-dark" th:text="${university.speciality}">IT</span>
+                            <span class="badge bg-info text-dark me-1" th:text="${university.city}"></span>
+                            <span class="badge bg-warning text-dark" th:text="${university.speciality}"></span>
                         </p>
-                        <p class="card-text" th:text="${university.description}">Ведущий университет России с богатой
-                            историей и традициями.</p>
+                        <p class="card-text" th:text="${university.description}"></p>
                         <a th:href="@{/universities/{id}(id=${university.id})}" class="btn btn-primary">Подробнее</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Пример вуза 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card university-card h-100">
-                    <div class="position-absolute top-0 end-0 m-3">
-                        <span class="badge bg-success rating-badge">4.6</span>
-                    </div>
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Санкт-Петербургский государственный университет</h5>
-                        <p class="card-text">
-                            <span class="badge bg-info text-dark me-1">Санкт-Петербург</span>
-                            <span class="badge bg-warning text-dark">Экономика</span>
-                        </p>
-                        <p class="card-text">Один из старейших и наиболее престижных университетов России.</p>
-                        <a href="#" class="btn btn-primary">Подробнее</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Пример вуза 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card university-card h-100">
-                    <div class="position-absolute top-0 end-0 m-3">
-                        <span class="badge bg-success rating-badge">4.5</span>
-                    </div>
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Новосибирский государственный университет</h5>
-                        <p class="card-text">
-                            <span class="badge bg-info text-dark me-1">Новосибирск</span>
-                            <span class="badge bg-warning text-dark">Естественные науки</span>
-                        </p>
-                        <p class="card-text">Ведущий научно-образовательный центр Сибири.</p>
-                        <a href="#" class="btn btn-primary">Подробнее</a>
                     </div>
                 </div>
             </div>
