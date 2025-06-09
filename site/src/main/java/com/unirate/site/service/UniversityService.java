@@ -39,4 +39,8 @@ public class UniversityService {
     public University create(University university) {
         return universityRepository.save(university);
     }
+
+    public List<String> findDistinctCities() {
+        return universityRepository.findDistinctCities();
+    }
 }

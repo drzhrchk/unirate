@@ -18,4 +18,8 @@ public class ProgramService {
     public List<Program> findByUniversityId(Long universityId) {
         return programRepository.findByUniversityId(universityId).get();
     }
+
+    public List<String> findDisttinctProgramNames() {
+        return programRepository.findDistinctProgramNames();
+    }
 }

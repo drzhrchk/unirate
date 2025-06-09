@@ -28,4 +28,7 @@ public interface UniversityRepository extends JpaRepository<University, Long> {
 
     @Query(value = " SELECT u.* FROM university u JOIN program on u.id = program.university_id  WHERE city = :city AND program.name = :programName", nativeQuery = true)
     Optional<University> findByCityAndProgramName(String programName, String city);
+
+    @Query(value = "SELECT DISTINCT city FROM university", nativeQuery = true)
+    List<String> findDistinctCities();
 }

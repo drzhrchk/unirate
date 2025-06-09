@@ -37,6 +37,8 @@ public class UniversityController {
     public String showHomePage(Model model) {
         model.addAttribute("universities", universityService.findAll());
         model.addAttribute("program", universityService.findAll());
+        model.addAttribute("programNames", programService.findDisttinctProgramNames());
+        model.addAttribute("cityNames", universityService.findDistinctCities());
         return "index"; // templates/index.html
     }
 
@@ -52,23 +54,23 @@ public class UniversityController {
 
     @GetMapping("/universities")
     public String showFilteredUniversities(
-        @RequestParam(required = false, defaultValue = "Все города") String city,
-        @RequestParam(required = false, defaultValue = "Все направления") String program,
-        Model model) {
+            @RequestParam(required = false, defaultValue = "Все города") String city,
+            @RequestParam(required = false, defaultValue = "Все направления") String program,
+            Model model) {
+        System.out.println(city);
+        System.out.println(program);
+        if (!"Все города".equals(city) && !"Все направления".equals(program)) {
+            model.addAttribute("universities", universityService.findByCityAndProgramName(city, program));
+        } else if (!"Все города".equals(city)) {
+            model.addAttribute("universities", universityService.findByCity(city));
+        } else if (!"Все направления".equals(program)) {
+            model.addAttribute("universities", universityService.findByProgramName(program));
+        } else {
+            model.addAttribute("universities", universityService.findAll());
+        }
 
-    // Правильное сравнение строк в Java
-    if (!"Все города".equals(city) && !"Все направления".equals(program)) {
-        model.addAttribute("universities", universityService.findByCityAndProgramName(city, program));
-    } else if (!"Все города".equals(city)) {
-        model.addAttribute("universities", universityService.findByCity(city));
-    } else if (!"Все направления".equals(program)) {
-        model.addAttribute("universities", universityService.findByProgramName(program));
-    } else {
-        model.addAttribute("universities", universityService.findAll());
+        return "university";
     }
-
-    return "university";
-}
 
     @GetMapping("/api")
     @ResponseBody

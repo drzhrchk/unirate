@@ -14,4 +14,7 @@ import com.unirate.site.model.Program;
 public interface ProgramRepository extends JpaRepository<Program, Long> {
     @Query(value = "SELECT * FROM program WHERE university_id = :universityId", nativeQuery = true)
     Optional<List<Program>> findByUniversityId(Long universityId);
+
+    @Query(value = "SELECT DISTINCT name FROM program", nativeQuery = true)
+    List<String> findDistinctProgramNames();
 }
