@@ -45,8 +45,6 @@ public class UniversityController {
         University university = universityService.findUniversityById(pageNumber);
         university.setReviews(reviewService.findByUniversityId(pageNumber));
         university.setPrograms(programService.findByUniversityId(pageNumber));
-        System.out.println(university.getName());
-        System.out.println(university.getPrograms().get(0).getName());
         model.addAttribute("university", university);
 
         return "university";
