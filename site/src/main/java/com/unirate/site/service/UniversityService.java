@@ -24,16 +24,16 @@ public class UniversityService {
         return universityRepository.findById(id).get();
     }
 
-    public University findByCity(String city) {
-        return universityRepository.findByCity(city).get();
+    public List<University> findByCity(String city) {
+        return universityRepository.findByCity(city);
     }
 
-    public University findByProgramName(String programName) {
-        return universityRepository.findByProgramName(programName).get();
+    public List<University> findByProgramName(String programName) {
+        return universityRepository.findByProgramName(programName);
     }
 
-    public University findByCityAndProgramName(String programName, String city) {
-        return universityRepository.findByCityAndProgramName(programName, city).get();
+    public List<University> findByCityAndProgramName(String programName, String city) {
+        return universityRepository.findByCityAndProgramName(programName, city);
     }
 
     public University create(University university) {

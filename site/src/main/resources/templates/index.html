@@ -74,39 +74,13 @@
             </div>
         </div>
 
-        <!-- Поисковая панель -->
-        <div class="row justify-content-center">
-            <div class="col-md-8 search-box">
-                <form class="row g-3" th:action="@{/universities}">
-                    <div class="col-md-6">
-                        <label for="city" class="form-label">Город</label>
-                        <select id="city" class="form-select" name="city">
-                            <option selected>Все города</option>
-                            <option th:each="cityName : ${cityNames}" th:value="${cityName}" th:text="${cityName}">
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="speciality" class="form-label">Направление</label>
-                        <select id="speciality" class="form-select" name="program">
-                            <option selected>Все направления</option>
-                            <option th:each="programName : ${programNames}" th:value="${programName}"
-                                th:text="${programName}">
-                        </select>
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary w-100">Найти</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <!-- Рейтинг вузов -->
         <div class="row">
             <!-- Пример вуза 1 -->
             <div class="col-md-4 mb-4" th:each="university : ${universities}">
                 <div class="card university-card h-100">
                     <div class="position-absolute top-0 end-0 m-3">
-                        <span class="badge bg-success rating-badge" th:text="${university.rating}"></span>
+                        <span class="badge bg-success rating-badge" th:text="${university.avgRating}"></span>
                     </div>
                     <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
                     <div class="card-body">

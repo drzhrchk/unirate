@@ -52,26 +52,6 @@ public class UniversityController {
         return "university";
     }
 
-    @GetMapping("/universities")
-    public String showFilteredUniversities(
-            @RequestParam(required = false, defaultValue = "Все города") String city,
-            @RequestParam(required = false, defaultValue = "Все направления") String program,
-            Model model) {
-        System.out.println(city);
-        System.out.println(program);
-        if (!"Все города".equals(city) && !"Все направления".equals(program)) {
-            model.addAttribute("universities", universityService.findByCityAndProgramName(city, program));
-        } else if (!"Все города".equals(city)) {
-            model.addAttribute("universities", universityService.findByCity(city));
-        } else if (!"Все направления".equals(program)) {
-            model.addAttribute("universities", universityService.findByProgramName(program));
-        } else {
-            model.addAttribute("universities", universityService.findAll());
-        }
-
-        return "university";
-    }
-
     @GetMapping("/api")
     @ResponseBody
     public List<University> findAllUniversities() {
@@ -89,9 +69,19 @@ public class UniversityController {
             @RequestParam Double rating,
             @RequestParam String text,
             @RequestParam String author,
+            @RequestParam Double educationRating,
+            @RequestParam Double teachersRating,
+            @RequestParam Double foodRating,
+            @RequestParam Double lifeRating,
             @PathVariable Long id) {
-        reviewService.create(new Review(universityService.findUniversityById(id), author, rating, text));
+        reviewService.create(new Review(universityService.findUniversityById(id), author, rating, text, educationRating,
+                teachersRating, foodRating, lifeRating));
         return "redirect:/universities/" + id;
+    }
+
+    @GetMapping("/raitings")
+    public String getRaitings() {
+        return "raitings";
     }
 
     @GetMapping("/error")

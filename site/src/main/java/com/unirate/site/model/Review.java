@@ -20,11 +20,47 @@ public class Review {
     private String author;
     private Double rating;
     private String text;
+    private Double educationRating;
+    private Double teachersRating;
+    private Double foodRating;
+    private Double lifeRating;
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     @ManyToOne
     @JoinColumn(name = "university_id")
     private University university;
+
+    public Double getEducationRating() {
+        return educationRating;
+    }
+
+    public void setEducationRating(Double educationRating) {
+        this.educationRating = educationRating;
+    }
+
+    public Double getTeachersRating() {
+        return teachersRating;
+    }
+
+    public void setTeachersRating(Double teachersRating) {
+        this.teachersRating = teachersRating;
+    }
+
+    public Double getFoodRating() {
+        return foodRating;
+    }
+
+    public void setFoodRating(Double foodRating) {
+        this.foodRating = foodRating;
+    }
+
+    public Double getLifeRating() {
+        return lifeRating;
+    }
+
+    public void setLifeRating(Double lifeRating) {
+        this.lifeRating = lifeRating;
+    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -81,6 +117,20 @@ public class Review {
         this.author = author;
         this.rating = rating;
         this.text = text;
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public Review(University university, String author, Double rating, String text, Double educationRating,
+            Double teachersRating,
+            Double foodRating, Double lifeRating) {
+        this.university = university;
+        this.author = author;
+        this.rating = rating;
+        this.text = text;
+        this.educationRating = educationRating;
+        this.teachersRating = teachersRating;
+        this.foodRating = foodRating;
+        this.lifeRating = lifeRating;
         this.createdAt = LocalDateTime.now();
     }
 

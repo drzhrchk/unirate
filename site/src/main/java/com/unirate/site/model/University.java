@@ -21,7 +21,6 @@ public class University {
     private Long id;
     private String name;
     private String city;
-    private Double rating;
     private String speciality;
     private String description;
     private int foundationYear;
@@ -31,6 +30,71 @@ public class University {
     private int programsCount;
     private boolean hasDormitory;
     private String mapSource;
+    private Double avgEducationRating;
+    private Double avgTeachersRating;
+    private Double avgFoodRating;
+    private Double avgLifeRating;
+    private Double avgRating;
+
+    public University(String name, String city, String speciality, String description,
+            int foundationYear, long studentsCount, long teachersCount, int facultiesCount, int programsCount,
+            boolean hasDormitory, String mapSource, Double educationRating, Double teachersRating, Double foodRating,
+            Double lifeRating, List<Program> programs, List<Review> reviews, String address, String phone,
+            String email, String website) {
+        this.name = name;
+        this.city = city;
+        this.speciality = speciality;
+        this.description = description;
+        this.foundationYear = foundationYear;
+        this.studentsCount = studentsCount;
+        this.teachersCount = teachersCount;
+        this.facultiesCount = facultiesCount;
+        this.programsCount = programsCount;
+        this.hasDormitory = hasDormitory;
+        this.mapSource = mapSource;
+        this.avgEducationRating = educationRating;
+        this.avgTeachersRating = teachersRating;
+        this.avgFoodRating = foodRating;
+        this.avgLifeRating = lifeRating;
+        this.programs = programs;
+        this.reviews = reviews;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.website = website;
+    }
+
+    public Double getAvgEducationRating() {
+        return avgEducationRating;
+    }
+
+    public void setAvgEducationRating(Double avgEducationRating) {
+        this.avgEducationRating = avgEducationRating;
+    }
+
+    public Double getAvgTeachersRating() {
+        return avgTeachersRating;
+    }
+
+    public void setAvgTeachersRating(Double avgTeachersRating) {
+        this.avgTeachersRating = avgTeachersRating;
+    }
+
+    public Double getAvgFoodRating() {
+        return avgFoodRating;
+    }
+
+    public void setAvgFoodRating(Double avgFoodRating) {
+        this.avgFoodRating = avgFoodRating;
+    }
+
+    public Double getAvgLifeRating() {
+        return avgLifeRating;
+    }
+
+    public void setAvgLifeRating(Double avgLifeRating) {
+        this.avgLifeRating = avgLifeRating;
+    }
 
     public String getMapSource() {
         return mapSource;
@@ -155,14 +219,6 @@ public class University {
         this.speciality = speciality;
     }
 
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
     public Long getId() {
         return id;
     }
@@ -192,21 +248,20 @@ public class University {
 
     @Override
     public String toString() {
-        return "University [id=" + id + ", name=" + name + ", city=" + city + ", rating=" + rating + ", speciality="
+        return "University [id=" + id + ", name=" + name + ", city=" + city + ", speciality="
                 + speciality + ", description=" + description + ", foundationYear=" + foundationYear
                 + ", studentsCount=" + studentsCount + ", teachersCount=" + teachersCount + ", facultiesCount="
                 + facultiesCount + ", programsCount=" + programsCount + ", hasDormitory=" + hasDormitory + ", address="
                 + address + ", phone=" + phone + ", email=" + email + ", website=" + website + "]";
     }
 
-    public University(Long id, String name, String city, Double rating, String speciality, String description,
+    public University(Long id, String name, String city, String speciality, String description,
             int foundationYear, long studentsCount, long teachersCount, int facultiesCount, int programsCount,
             boolean hasDormitory, String address, String phone, String email, String website, String mapSource,
             ProgramService programService, ReviewService reviewService) {
         this.id = id;
         this.name = name;
         this.city = city;
-        this.rating = rating;
         this.speciality = speciality;
         this.description = description;
         this.foundationYear = foundationYear;
@@ -230,5 +285,13 @@ public class University {
 
     public void setPrograms(List<Program> programs) {
         this.programs = programs;
+    }
+
+    public Double getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(Double avgRating) {
+        this.avgRating = avgRating;
     }
 }
