@@ -33,7 +33,8 @@ public class University {
     private Double avgTeachersRating;
     private Double avgFoodRating;
     private Double avgLifeRating;
-    private Double Rating;
+    private Double rating;
+    private String image;
 
     public University(String name, String city, String speciality, String description,
             int foundationYear, long studentsCount, long teachersCount, int facultiesCount, int programsCount,
@@ -56,7 +57,7 @@ public class University {
         this.avgTeachersRating = teachersRating;
         this.avgFoodRating = foodRating;
         this.avgLifeRating = lifeRating;
-        this.Rating = rating;
+        rating = rating;
         this.programs = programs;
         this.reviews = reviews;
         this.address = address;
@@ -256,11 +257,35 @@ public class University {
                 + address + ", phone=" + phone + ", email=" + email + ", website=" + website + "]";
     }
 
-    public University(Long id, String name, String city, String speciality, String description,
-            int foundationYear, long studentsCount, long teachersCount, int facultiesCount, int programsCount,
-            boolean hasDormitory, String address, String phone, String email, String website, String mapSource,
-            ProgramService programService, ReviewService reviewService) {
-        this.id = id;
+    public List<Program> getPrograms() {
+        return programs;
+    }
+
+    public void setPrograms(List<Program> programs) {
+        this.programs = programs;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double Rating) {
+        rating = Rating;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public University(String name, String city, String speciality, String description, int foundationYear,
+            long studentsCount, long teachersCount, int facultiesCount, int programsCount, boolean hasDormitory,
+            String mapSource, Double avgEducationRating, Double avgTeachersRating, Double avgFoodRating,
+            Double avgLifeRating, Double rating, String image, List<Program> programs, List<Review> reviews,
+            String address, String phone, String email, String website) {
         this.name = name;
         this.city = city;
         this.speciality = speciality;
@@ -271,28 +296,19 @@ public class University {
         this.facultiesCount = facultiesCount;
         this.programsCount = programsCount;
         this.hasDormitory = hasDormitory;
+        this.mapSource = mapSource;
+        this.avgEducationRating = avgEducationRating;
+        this.avgTeachersRating = avgTeachersRating;
+        this.avgFoodRating = avgFoodRating;
+        this.avgLifeRating = avgLifeRating;
+        this.rating = rating;
+        this.image = image;
+        this.programs = programs;
+        this.reviews = reviews;
         this.address = address;
         this.phone = phone;
         this.email = email;
         this.website = website;
-        this.mapSource = mapSource;
-        this.programs = programService.findByUniversityId(id);
-        this.reviews = reviewService.findByUniversityId(id);
     }
 
-    public List<Program> getPrograms() {
-        return programs;
-    }
-
-    public void setPrograms(List<Program> programs) {
-        this.programs = programs;
-    }
-
-    public Double getRating() {
-        return Rating;
-    }
-
-    public void setRating(Double Rating) {
-        this.Rating = Rating;
-    }
 }
