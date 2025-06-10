@@ -59,4 +59,8 @@ public class UniversityService {
     public List<University> findAllOrderByAvgTeachersRaiting() {
         return universityRepository.findAllOrderByAvgTeachersRaiting();
     }
+
+    public List<University> findAllOrderByRating() {
+        return universityRepository.findAllOrderByRating();
+    }
 }

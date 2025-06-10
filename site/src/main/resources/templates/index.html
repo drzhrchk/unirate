@@ -63,7 +63,7 @@
         <!-- Заголовок и поиск -->
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h1 class="display-4">Рейтинг университетов 2023</h1>
+                <h1 class="display-4">Рейтинг университетов 2025</h1>
                 <p class="lead">Найдите лучший вуз для вашего будущего</p>
             </div>
         </div>
@@ -75,7 +75,6 @@
                     <div class="position-absolute top-0 end-0 m-3">
                         <span class="badge bg-success rating-badge" th:text="${university.rating}"></span>
                     </div>
-                    <img th:src="@{${university.image}}" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${university.name}"></h5>
                         <p class="card-text">

@@ -33,7 +33,7 @@ public class UniversityController {
 
     @GetMapping("/")
     public String showHomePage(Model model) {
-        model.addAttribute("universities", universityService.findAll());
+        model.addAttribute("universities", universityService.findAllOrderByRating());
         model.addAttribute("program", universityService.findAll());
         model.addAttribute("programNames", programService.findDisttinctProgramNames());
         model.addAttribute("cityNames", universityService.findDistinctCities());

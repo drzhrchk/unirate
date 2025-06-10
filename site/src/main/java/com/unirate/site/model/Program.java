@@ -19,6 +19,8 @@ public class Program {
     private String degree;
     private String description;
     private Double tuitionFee;
+    private Double minScore;
+    private Double avgScore;
 
     @ManyToOne
     @JoinColumn(name = "university_id")
@@ -37,6 +39,34 @@ public class Program {
         this.description = description;
         this.tuitionFee = tuitionFee;
         this.university = university;
+    }
+
+    public Program(Long facultyId, String name, String degree, String description, Double tuitionFee, Double minScore,
+            Double avgScore, University university) {
+        this.facultyId = facultyId;
+        this.name = name;
+        this.degree = degree;
+        this.description = description;
+        this.tuitionFee = tuitionFee;
+        this.minScore = minScore;
+        this.avgScore = avgScore;
+        this.university = university;
+    }
+
+    public Double getMinScore() {
+        return minScore;
+    }
+
+    public void setMinScore(Double minScore) {
+        this.minScore = minScore;
+    }
+
+    public Double getAvgScore() {
+        return avgScore;
+    }
+
+    public void setAvgScore(Double avgScore) {
+        this.avgScore = avgScore;
     }
 
     public Long getId() {
